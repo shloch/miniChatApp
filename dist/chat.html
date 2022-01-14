@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1> Chat </h1>
+    <form>
+        <input placeholder="username" required name="username" />
+        <input placeholder="message" required name="message" />
+        <button type="submit"> Envoyer </button>
+    </form>
+
+    <ul id="allMessages">
+
+    </ul>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+        var form = document.querySelector('form');
+        var username = document.querySelector('input[name="username"]');
+        var message = document.querySelector('input[name="message"]');
+        let allMessages = document.querySelector('#allMessages');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (username.value && message.value) {
+
+                console.log(username.value, message.value)
+                socket.emit('chat message', { username: username.value, message: message.value });
+                message.value = '';
+            }
+        });
+
+        socket.on('chat message', function (msg) {
+            console.log('new message sent')
+            var item = document.createElement('li');
+            item.innerHTML = `<strong style="color: purple"> ${msg.username} : </strong> ${msg.message}`;
+            allMessages.prepend(item);
+            window.scrollTo(0, document.body.scrollHeight);
+        });
+
+    </script>
+</body>
+
+</html>
