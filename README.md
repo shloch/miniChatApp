@@ -12,3 +12,4 @@
 
 ## Acknowledgements
 - https://socket.io/get-started/chat
+- [Teacher] hicham.slimani@digityourdream.fr
