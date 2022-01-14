@@ -3,6 +3,7 @@
 ## starting the app
 - `npm install`
 - `nodemon server.js`
+- open `http://localhost:5000/` on your browser
 
 ## screenshot
 
